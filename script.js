@@ -23,8 +23,7 @@ function drawSky() {
 }
 
 
-// required elements of this task:
-// 1
+// required elements of the task
 function drawTree(x, y) {
     // draw tree's trunk
     ctx.fillStyle = 'brown';
@@ -35,14 +34,14 @@ function drawTree(x, y) {
     ctx.fillStyle = 'green';
 
     let circle = new Path2D();
-    circle.arc(x + 10, y - trunkHeight/2,
+    circle.arc(x + 10, y - trunkHeight / 2,
         50, 0, 2 * Math.PI);
 
     ctx.fill(circle)
 
 }
 
-// 2
+// required elements of the task
 function drawSun() {
     ctx.fillStyle = 'yellow';
 
@@ -54,26 +53,48 @@ function drawSun() {
     ctx.fill(circle);
 }
 
-// 3
+// required elements of the task
 function drawBush(x, y) {
+    ctx.fillStyle = 'darkgreen';
 
+    let circle = new Path2D();
+    circle.arc(x, y, 25, 0, 2 * Math.PI);
+    ctx.fill(circle);
+
+
+    ctx.fillStyle = 'darkred';
+    const berryCount = getRandomIntInRange(0, 5);
+    for (let i = 0; i < berryCount; i++) {
+        let berry = new Path2D();
+        berry.arc(x + getRandomIntInRange(-15, 15), y + getRandomIntInRange(-15, 15),
+            3, 0, 2 * Math.PI);
+        ctx.fill(berry);
+    }
 }
 
-// 4
+// required elements of the task
 function drawBird(x, y) {
 
 }
 
 
 function initCanvas() {
-    width = window.innerWidth;
-    height = window.innerHeight;
+    canvas.width = width = window.innerWidth;
+    canvas.height = height = window.innerHeight;
 
     drawGrass();
     drawSky();
     drawSun();
 
-    let treeCount = Math.floor(Math.random() * 5);
+    const bushCount = getRandomIntInRange(2, 10);
+    for (let i = 0; i < bushCount; i++) {
+        let x = getRandomIntInRange(25, width - 25);
+        let y = getRandomIntInRange(height - height / 3, height - 50);
+
+        drawBush(x, y);
+    }
+
+    const treeCount = getRandomIntInRange(1, 5);
     for (let i = 0; i < treeCount; i++) {
         let x = getRandomIntInRange(25, width - 25);
         let y = getRandomIntInRange(height - height / 3, height - 50);
